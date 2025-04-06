@@ -2,4 +2,8 @@
     <string name="app_name">CST 338 HW 4 - GymLog</string>
     <string name="exercise">Exercise</string>
     <string name="enter_an_exercise">Enter an exercise</string>
+    <string name="weight">Weight</string>
+    <string name="enter_a_weight">Enter a weight</string>
+    <string name="reps">Reps</string>
+    <string name="enter_reps">Enter reps</string>
 </resources>
