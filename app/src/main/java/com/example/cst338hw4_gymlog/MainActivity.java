@@ -13,7 +13,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cst338hw4_gymlog.databinding.ActivityMainBinding;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+
+    private final String TAG = "DAC_GYMLOG";
 
     String exercise;
     double weight;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
+                updateDisplay();
             }
         });
     }
@@ -42,13 +47,20 @@ public class MainActivity extends AppCompatActivity {
         try {
             weight = Double.parseDouble(binding.weightInputEditText.getText().toString());
         } catch (NumberFormatException e) {
-            Log.d("DAC_GYMLOG", "Error reading value from Weight");
+            Log.d(TAG, "Error reading value from Weight");
         }
 
         try {
-            weight = Integer.parseInt(binding.repsInputEditText.getText().toString());
+            reps = Integer.parseInt(binding.repsInputEditText.getText().toString());
         } catch (NumberFormatException e) {
-            Log.d("DAC_GYMLOG", "Error reading value from Weight");
+            Log.d(TAG, "Error reading value from Weight");
         }
+    }
+
+    private void updateDisplay() {
+        String currentInfo = binding.logDisplayTextView.getText().toString();
+        String newDisplay = String.format(Locale.US, "Exercise:%s%nWeight:%.2f%nReps:%d%n=-=-=-=%n",exercise,weight,reps);
+        newDisplay += currentInfo;
+        binding.logDisplayTextView.setText(newDisplay);
     }
 }
