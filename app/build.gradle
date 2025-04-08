@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    def room_version = "2.6.1"
+
+    implementation "androidx.room:room-runtime:$room_version"
 
     implementation libs.appcompat
     implementation libs.material
