@@ -24,7 +24,7 @@ public class GymLog {
         this.weight = weight;
         this.reps = reps;
 
-        //date = LocalDate.now();
+        date = LocalDate.now();
 
     }
 
