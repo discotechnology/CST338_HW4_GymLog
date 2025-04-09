@@ -22,6 +22,21 @@ public class GymLogRepository {
         this.allLogs = (ArrayList<GymLog>) this.gymLogDAO.getAllRecords();
     }
 
+    public static GymLogRepository getRepository(Application application) {
+        Future<GymLogRepository> future = GymLogDatabase.databaseWriteExecutor.submit(new Callable<GymLogRepository>() {
+            @Override
+            public GymLogRepository call() throws Exception {
+                return new GymLogRepository(application);
+            }
+        });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.d(MainActivity.TAG, "Problem getting repository, thread error.");
+        }
+        return null;
+    }
+
     public ArrayList<GymLog> getAllLogs() {
         Future<ArrayList<GymLog>> future = GymLogDatabase.databaseWriteExecutor.submit(new Callable<ArrayList<GymLog>>() {
             @Override
