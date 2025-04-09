@@ -39,4 +39,10 @@ public class GymLogRepository {
         }
         return null;
     }
+
+    public void insertGymLog(GymLog gymLog) {
+        GymLogDatabase.databaseWriteExecutor.execute(() -> {
+            gymLogDAO.insert(gymLog);
+        });
+    }
 }
