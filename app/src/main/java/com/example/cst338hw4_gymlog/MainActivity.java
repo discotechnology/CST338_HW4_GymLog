@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cst338hw4_gymlog.database.GymLogRepository;
+import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.databinding.ActivityMainBinding;
 
 import java.util.Locale;
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     double weight;
     int reps;
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
+    private GymLogRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +35,23 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        repository = new GymLogRepository(getApplication());
+
         binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         binding.logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
+                insertGymlogRecord();
                 updateDisplay();
             }
         });
+    }
+
+    private void insertGymlogRecord() {
+        GymLog log = new GymLog(exercise, weight, reps);
+        repository.insertGymLog(log);
     }
 
     private void getInformationFromDisplay() {
