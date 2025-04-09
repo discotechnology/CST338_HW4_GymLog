@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.cst338hw4_gymlog.database.GymLogDatabase;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = GymLogDatabase.gymLogTable)
@@ -18,14 +18,14 @@ public class GymLog {
     private double weight;
     private int reps;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     public GymLog(String exercise, double weight, int reps) {
         this.exercise = exercise;
         this.weight = weight;
         this.reps = reps;
 
-        date = LocalDate.now();
+        date = LocalDateTime.now();
 
     }
 
@@ -61,11 +61,11 @@ public class GymLog {
         this.reps = reps;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
