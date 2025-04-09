@@ -1,6 +1,7 @@
 package com.example.cst338hw4_gymlog.Database;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -9,6 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.cst338hw4_gymlog.Database.Entities.GymLog;
+import com.example.cst338hw4_gymlog.MainActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,6 +46,7 @@ public abstract class GymLogDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+            Log.i(MainActivity.TAG, "DATABASE CREATED!!!!!");
             //TODO; add databaseWriteExector.execute(() -> {...})
         }
     };

@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "DAC_GYMLOG";
+    public static final String TAG = "DAC_GYMLOG";
 
     String exercise;
     double weight;
