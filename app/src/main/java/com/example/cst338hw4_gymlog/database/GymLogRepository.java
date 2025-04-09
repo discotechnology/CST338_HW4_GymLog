@@ -19,14 +19,14 @@ public class GymLogRepository {
     public GymLogRepository(Application application) {
         GymLogDatabase db = GymLogDatabase.getGymLogDatabase(application);
         this.gymLogDAO = db.gymLogDAO();
-        this.allLogs = this.gymLogDAO.getAllRecords();
+        this.allLogs = (ArrayList<GymLog>) this.gymLogDAO.getAllRecords();
     }
 
     public ArrayList<GymLog> getAllLogs() {
         Future<ArrayList<GymLog>> future = GymLogDatabase.databaseWriteExecutor.submit(new Callable<ArrayList<GymLog>>() {
             @Override
             public ArrayList<GymLog> call() throws Exception {
-                return gymLogDAO.getAllRecords();
+                return (ArrayList<GymLog>) gymLogDAO.getAllRecords();
             }
         });
         try {
