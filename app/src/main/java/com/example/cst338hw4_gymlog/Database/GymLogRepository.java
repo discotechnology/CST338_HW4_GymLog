@@ -14,5 +14,10 @@ public class GymLogRepository {
     public GymLogRepository(Application application) {
         GymLogDatabase db = GymLogDatabase.getGymLogDatabase(application);
         this.gymLogDAO = db.gymLogDAO();
+        this.allLogs = this.gymLogDAO.getAllRecords();
+    }
+
+    public ArrayList<GymLog> getAllLogs() {
+        return allLogs;
     }
 }
