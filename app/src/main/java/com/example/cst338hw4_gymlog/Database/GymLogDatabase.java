@@ -7,4 +7,5 @@ import com.example.cst338hw4_gymlog.Database.Entities.GymLog;
 
 @Database(entities = {GymLog.class}, version = 1, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
+    public static final String gymLogTable = "gymLogTable";
 }

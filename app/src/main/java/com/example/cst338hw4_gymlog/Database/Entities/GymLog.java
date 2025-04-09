@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.cst338hw4_gymlog.Database.GymLogDatabase;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity(tableName = "gymLog")
+@Entity(tableName = GymLogDatabase.gymLogTable)
 public class GymLog {
 
     @PrimaryKey(autoGenerate = true)
