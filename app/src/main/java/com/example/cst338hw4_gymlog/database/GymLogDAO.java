@@ -1,14 +1,13 @@
-package com.example.cst338hw4_gymlog.Database;
+package com.example.cst338hw4_gymlog.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.cst338hw4_gymlog.Database.Entities.GymLog;
+import com.example.cst338hw4_gymlog.database.entities.GymLog;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Dao
 public interface GymLogDAO {

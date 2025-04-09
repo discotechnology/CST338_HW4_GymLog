@@ -1,10 +1,9 @@
-package com.example.cst338hw4_gymlog.Database.Entities;
+package com.example.cst338hw4_gymlog.database.entities;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.cst338hw4_gymlog.Database.GymLogDatabase;
+import com.example.cst338hw4_gymlog.database.GymLogDatabase;
 
 import java.time.LocalDate;
 import java.util.Objects;

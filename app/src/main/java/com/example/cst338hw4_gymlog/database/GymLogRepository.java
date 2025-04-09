@@ -1,17 +1,15 @@
-package com.example.cst338hw4_gymlog.Database;
+package com.example.cst338hw4_gymlog.database;
 
 import android.app.Application;
 import android.util.Log;
 
-import com.example.cst338hw4_gymlog.Database.Entities.GymLog;
+import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.MainActivity;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-
-import kotlin.reflect.KCallable;
 
 public class GymLogRepository {
 

@@ -1,4 +1,4 @@
-package com.example.cst338hw4_gymlog.Database;
+package com.example.cst338hw4_gymlog.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.cst338hw4_gymlog.Database.Entities.GymLog;
+import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.MainActivity;
 
 import java.util.concurrent.ExecutorService;
