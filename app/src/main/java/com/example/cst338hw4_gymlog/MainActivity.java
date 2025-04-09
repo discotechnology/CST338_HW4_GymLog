@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cst338hw4_gymlog.database.GymLogDatabase;
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.databinding.ActivityMainBinding;
@@ -76,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
         String newDisplay = String.format(Locale.US, "Exercise: %s%nWeight: %.2f%nReps: %d%n=-=-=-=%n",exercise,weight,reps);
         newDisplay += currentInfo;
         binding.logDisplayTextView.setText(newDisplay);
+        Log.i(TAG, repository.getAllLogs().toString());
     }
 }

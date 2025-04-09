@@ -29,6 +29,17 @@ public class GymLog {
 
     }
 
+    @Override
+    public String toString() {
+        return "GymLog{" +
+                "id=" + id +
+                ", exercise='" + exercise + '\'' +
+                ", weight=" + weight +
+                ", reps=" + reps +
+                ", date=" + date +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
