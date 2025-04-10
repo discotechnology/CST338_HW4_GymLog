@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertGymlogRecord() {
+        if(exercise.isEmpty()) {
+            return;
+        }
         GymLog log = new GymLog(exercise, weight, reps);
         repository.insertGymLog(log);
     }
