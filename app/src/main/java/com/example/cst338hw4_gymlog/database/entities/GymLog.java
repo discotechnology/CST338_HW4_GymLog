@@ -31,13 +31,11 @@ public class GymLog {
 
     @Override
     public String toString() {
-        return "GymLog{" +
-                "id=" + id +
-                ", exercise='" + exercise + '\'' +
-                ", weight=" + weight +
-                ", reps=" + reps +
-                ", date=" + date +
-                '}';
+        return exercise + '\n' +
+                "Weight: " + weight + '\n' +
+                "Reps: " + reps + '\n' +
+                "Date: " + date.toString() + '\n' +
+                "=-=-=-=-=-=-=-=-=-=-=-=";
     }
 
     public int getId() {
