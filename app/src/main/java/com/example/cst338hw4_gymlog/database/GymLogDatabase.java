@@ -12,13 +12,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.MainActivity;
+import com.example.cst338hw4_gymlog.database.entities.User;
 import com.example.cst338hw4_gymlog.database.typeConverters.LocalDateTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(LocalDateTypeConverter.class)
-@Database(entities = {GymLog.class}, version = 1, exportSchema = false)
+@Database(entities = {GymLog.class, User.class}, version = 2, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
 
     public static final String gymLogTable = "gymLogTable";
