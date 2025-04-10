@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     String exercise;
     double weight;
     int reps;
+    int loggedInUserID = -1;
 
     private ActivityMainBinding binding;
     private GymLogRepository repository;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if(exercise.isEmpty()) {
             return;
         }
-        GymLog log = new GymLog(exercise, weight, reps);
+        GymLog log = new GymLog(exercise, weight, reps, loggedInUserID);
         repository.insertGymLog(log);
     }
 
