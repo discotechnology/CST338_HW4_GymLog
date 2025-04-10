@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         repository.insertGymLog(log);
     }
 
+
     private void getInformationFromDisplay() {
 
         exercise = binding.exerciseInputEditText.getText().toString();

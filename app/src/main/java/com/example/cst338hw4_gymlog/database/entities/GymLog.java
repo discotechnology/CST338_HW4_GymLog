@@ -13,6 +13,7 @@ public class GymLog {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
+    private int userID;
 
     private String exercise;
     private double weight;
@@ -20,13 +21,22 @@ public class GymLog {
 
     private LocalDateTime date;
 
-    public GymLog(String exercise, double weight, int reps) {
+    public GymLog(String exercise, double weight, int reps, int userID) {
         this.exercise = exercise;
         this.weight = weight;
         this.reps = reps;
+        this.userID = userID;
 
         date = LocalDateTime.now();
 
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     @Override
@@ -83,11 +93,11 @@ public class GymLog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GymLog gymLog = (GymLog) o;
-        return id == gymLog.id && Double.compare(weight, gymLog.weight) == 0 && reps == gymLog.reps && Objects.equals(exercise, gymLog.exercise) && Objects.equals(date, gymLog.date);
+        return id == gymLog.id && userID == gymLog.userID && Double.compare(weight, gymLog.weight) == 0 && reps == gymLog.reps && Objects.equals(exercise, gymLog.exercise) && Objects.equals(date, gymLog.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, exercise, weight, reps, date);
+        return Objects.hash(id, userID, exercise, weight, reps, date);
     }
 }
