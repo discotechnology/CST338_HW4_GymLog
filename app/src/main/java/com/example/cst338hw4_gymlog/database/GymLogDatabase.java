@@ -57,4 +57,5 @@ public abstract class GymLogDatabase extends RoomDatabase {
     };
 
     public abstract GymLogDAO gymLogDAO();
+    public abstract UserDAO userDAO();
 }
