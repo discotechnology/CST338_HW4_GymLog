@@ -23,6 +23,7 @@ public abstract class GymLogDatabase extends RoomDatabase {
 
     public static final String gymLogTable = "gymLogTable";
     public static final String DATABASE_NAME = "GymLog_Database";
+    public static final String USER_TABLE = "userTable";
 
     private static volatile GymLogDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
