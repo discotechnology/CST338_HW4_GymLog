@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.cst338hw4_gymlog.database.GymLogDatabase;
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
+import com.example.cst338hw4_gymlog.database.entities.User;
 import com.example.cst338hw4_gymlog.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private GymLogRepository repository;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         loginUser();
+        invalidateOptionsMenu();
 
         if(loggedInUserID == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
@@ -62,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 updateDisplay();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu,menu);
+        return true;
     }
 
     private void insertGymlogRecord() {
