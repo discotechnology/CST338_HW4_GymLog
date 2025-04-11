@@ -1,6 +1,7 @@
 package com.example.cst338hw4_gymlog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -24,6 +25,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DAC_GYMLOG";
+    private static final String MAIN_ACTIVITY_USERID = "MAIN_ACTIVITY_USER_ID";
 
     String exercise;
     double weight;
@@ -98,5 +100,11 @@ public class MainActivity extends AppCompatActivity {
             sb.append(log.toString());
         }
         binding.logDisplayTextView.setText(sb.toString());
+    }
+
+    static Intent mainActivityIntentFactory(Context context, int userID) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(MAIN_ACTIVITY_USERID, userID);
+        return intent;
     }
 }
