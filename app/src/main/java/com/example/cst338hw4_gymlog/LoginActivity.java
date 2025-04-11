@@ -1,5 +1,7 @@
 package com.example.cst338hw4_gymlog;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +17,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    static Intent loginIntentFactory(Context context) {
+        return new Intent(context, LoginActivity.class);
     }
 }
