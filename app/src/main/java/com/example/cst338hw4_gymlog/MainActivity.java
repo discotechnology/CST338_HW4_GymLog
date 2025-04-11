@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //loginUser();
+        loginUser();
 
         if(loggedInUserID == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
             sb.append(log.toString());
         }
         binding.logDisplayTextView.setText(sb.toString());
+    }
+
+    private void loginUser() {
+        loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, -1);
     }
 
     static Intent mainActivityIntentFactory(Context context, int userID) {
