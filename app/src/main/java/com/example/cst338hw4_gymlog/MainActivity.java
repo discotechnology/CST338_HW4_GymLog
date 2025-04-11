@@ -1,6 +1,7 @@
 package com.example.cst338hw4_gymlog;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -87,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
-                logout();
-                return true;
+                showLogoutDialog()
+                return false;
             }
         });
         return true;
@@ -139,6 +140,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void logout () {
         startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+    }
+
+    private void showLogoutDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
+        final AlertDialog alertDialog = alertBuilder.create();
+
+        alertDialog.setTitle("Logout?");
+
     }
 
     static Intent mainActivityIntentFactory(Context context, int userID) {
