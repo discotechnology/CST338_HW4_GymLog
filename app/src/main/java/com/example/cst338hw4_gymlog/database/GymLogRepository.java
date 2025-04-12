@@ -3,6 +3,8 @@ package com.example.cst338hw4_gymlog.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.MainActivity;
 import com.example.cst338hw4_gymlog.database.entities.User;
@@ -73,20 +75,7 @@ public class GymLogRepository {
         });
     }
 
-    public User getUserByUsername(String username) {
-        Future<User> future = GymLogDatabase.databaseWriteExecutor.submit(
-                new Callable<User>() {
-                    @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUsername(username);
-                    }
-                }
-        );
-        try {
-            return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.i(MainActivity.TAG, "Problem getting user \"" + username + "\"");
-        }
-        return null;
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 }
