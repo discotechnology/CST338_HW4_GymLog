@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         loginUser();
-        invalidateOptionsMenu();
 
         if(loggedInUserID == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
