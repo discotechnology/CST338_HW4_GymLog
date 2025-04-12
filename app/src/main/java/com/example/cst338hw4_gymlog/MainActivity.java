@@ -135,14 +135,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
         loggedInUserID = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
         if(loggedInUserID != LOGGED_OUT) {
-            getUserFromDB();
             return;
         }
 
         loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, -1);
-        if(loggedInUserID != LOGGED_OUT) {
-            getUserFromDB();
-        }
     }
 
     private void logout () {
