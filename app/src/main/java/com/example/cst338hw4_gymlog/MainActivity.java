@@ -12,9 +12,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
@@ -138,7 +140,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, -1);
+        loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, LOGGED_OUT);
+        if(loggedInUserID == LOGGED_OUT) {
+            return;
+        } else {
+            LiveData<User> userObserver = repository.getUserByID(loggedInUserID);
+            userObserver.observe(this, user -> {
+                if(user != null) {
+                    return;
+                } else {
+                    invalidateOptionsMenu();
+                }
+            });
+        }
     }
 
     private void logout () {
