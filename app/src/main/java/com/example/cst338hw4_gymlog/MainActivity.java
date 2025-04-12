@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateSharedPreference() {
         SharedPreferences sharedPreferences = getApplicationContext()
-                .getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+                .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, loggedInUserID);
+        sharedPrefEditor.putInt(getString(R.string.preference_user_id_key), loggedInUserID);
         sharedPrefEditor.apply();
     }
 
