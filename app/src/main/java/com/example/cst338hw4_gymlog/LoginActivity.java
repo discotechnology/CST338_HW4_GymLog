@@ -46,6 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         User user = repository.getUserByUsername(username);
 
+        if(user == null) {
+            return false;
+        }
+
         String password = binding.passwordLoginEditText.getText().toString();
         return user.getPassword().equals(password);
     }
