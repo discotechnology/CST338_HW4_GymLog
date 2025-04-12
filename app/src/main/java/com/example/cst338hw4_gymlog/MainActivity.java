@@ -1,10 +1,10 @@
 package com.example.cst338hw4_gymlog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -12,28 +12,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.cst338hw4_gymlog.database.GymLogDatabase;
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.database.entities.User;
 import com.example.cst338hw4_gymlog.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DAC_GYMLOG";
-    private static final String MAIN_ACTIVITY_USERID = "MAIN_ACTIVITY_USER_ID";
+    private static final String MAIN_ACTIVITY_USERID = "com.example.cst338hw4_gymlog.MAIN_ACTIVITY_USER_ID";
+    private static final String SHARED_PREFERENCE_USERID_KEY = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_KEY";
+    private static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_VALUE";
+
+    private static final int LOGGED_OUT = -1;
 
     String exercise;
     double weight;
@@ -135,8 +132,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        user = new User("David", "Password");
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        loggedInUserID = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
+        if(loggedInUserID != LOGGED_OUT) {
+            getUserFromDB();
+            return;
+        }
+
         loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, -1);
+        if(loggedInUserID != LOGGED_OUT) {
+            getUserFromDB();
+        }
     }
 
     private void logout () {
