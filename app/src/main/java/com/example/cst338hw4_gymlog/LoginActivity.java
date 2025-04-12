@@ -40,14 +40,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean verifyUser() {
         String username = binding.userNameLoginEditText.getText().toString();
+        if(username.isEmpty()) {
+            Toast.makeText(LoginActivity.this, "No username entered", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         User user = repository.getUserByUsername(username);
 
         String password = binding.passwordLoginEditText.getText().toString();
-        if(user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getPassword().equals(password);
     }
 
     static Intent loginIntentFactory(Context context) {
