@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
         item.setVisible(true);
+        if(user == null) {
+            return false;
+        }
         item.setTitle(user.getUsername());
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -146,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             LiveData<User> userObserver = repository.getUserByID(loggedInUserID);
             userObserver.observe(this, user -> {
                 if(user != null) {
-                    return;
+                    this.user = user;
                 } else {
                     invalidateOptionsMenu();
                 }
