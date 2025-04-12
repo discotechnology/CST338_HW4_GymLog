@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private GymLogRepository repository;
+    private User user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "No username entered", Toast.LENGTH_SHORT).show();
             return false;
         }
-        User user = repository.getUserByUsername(username);
+        user = repository.getUserByUsername(username);
 
         if(user == null) {
             return false;
