@@ -26,9 +26,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DAC_GYMLOG";
-    private static final String MAIN_ACTIVITY_USERID = "com.example.cst338hw4_gymlog.MAIN_ACTIVITY_USER_ID";
-    private static final String SHARED_PREFERENCE_USERID_KEY = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_KEY";
-    private static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_VALUE";
+    public static final String MAIN_ACTIVITY_USERID = "com.example.cst338hw4_gymlog.MAIN_ACTIVITY_USER_ID";
+    public static final String SHARED_PREFERENCE_USERID_KEY = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_KEY";
+    public static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.cst338hw4_gymlog.SHARED_PREFERENCE_USERID_VALUE";
 
     private static final int LOGGED_OUT = -1;
 
