@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        repository = GymLogRepository.getRepository(getApplication());
         loginUser();
 
         if(loggedInUserID == -1) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        repository = GymLogRepository.getRepository(getApplication());
+
 
         binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
@@ -150,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
             userObserver.observe(this, user -> {
                 if(user != null) {
                     this.user = user;
-                } else {
                     invalidateOptionsMenu();
                 }
             });
