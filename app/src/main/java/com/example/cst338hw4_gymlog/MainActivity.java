@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = GymLogRepository.getRepository(getApplication());
-        loginUser();
+        loginUser(savedInstanceState);
 
         if(loggedInUserID == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
@@ -144,26 +144,35 @@ public class MainActivity extends AppCompatActivity {
         binding.logDisplayTextView.setText(sb.toString());
     }
 
-    private void loginUser() {
+    private void loginUser(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getApplicationContext()
                 .getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         loggedInUserID = sharedPreferences.getInt(getString(R.string.preference_user_id_key), LOGGED_OUT);
-        if(loggedInUserID != LOGGED_OUT) {
+
+
+        loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, LOGGED_OUT);
+
+        if(loggedInUserID == LOGGED_OUT && savedInstanceState != null
+                && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_KEY)) {
+            loggedInUserID = savedInstanceState.getInt(SAVED_INSTANCE_STATE_KEY, LOGGED_OUT);
+        }
+
+        if(loggedInUserID == LOGGED_OUT) {
+            loggedInUserID = getIntent().getIntExtra(SAVED_INSTANCE_STATE_KEY, LOGGED_OUT);
+        }
+
+        if(loggedInUserID == LOGGED_OUT) {
             return;
         }
 
-        loggedInUserID = getIntent().getIntExtra(MAIN_ACTIVITY_USERID, LOGGED_OUT);
-        if(loggedInUserID == LOGGED_OUT) {
-            return;
-        } else {
-            LiveData<User> userObserver = repository.getUserByID(loggedInUserID);
-            userObserver.observe(this, user -> {
-                if(user != null) {
-                    this.user = user;
-                    invalidateOptionsMenu();
-                }
-            });
-        }
+        LiveData<User> userObserver = repository.getUserByID(loggedInUserID);
+        userObserver.observe(this, user -> {
+            if(user != null) {
+                this.user = user;
+                invalidateOptionsMenu();
+            }
+        });
+
     }
 
     private void logout () {
