@@ -13,24 +13,19 @@ import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import java.util.List;
 
 public class GymLogViewModel extends AndroidViewModel {
+
     private GymLogRepository repository;
 
-    private LiveData<List<GymLog>> allLogsByID = null;
-    public GymLogViewModel (Application application, int userID) {
+    public GymLogViewModel (Application application) {
         super(application);
         repository = GymLogRepository.getRepository(application);
-        try {
-            allLogsByID = repository.getAllLogsByUserID(userID);
-        } catch (NullPointerException e) {
-            Log.e(MainActivity.TAG, "Unable to get repository: NullPointer exception");
-        }
     }
 
     public void insert(GymLog log) {
         repository.insertGymLog(log);
     }
 
-    public LiveData<List<GymLog>> getAllLogsByID() {
-        return allLogsByID;
+    public LiveData<List<GymLog>> getAllLogsByID(int userID) {
+        return repository.getAllLogsByUserID(userID);
     }
 }

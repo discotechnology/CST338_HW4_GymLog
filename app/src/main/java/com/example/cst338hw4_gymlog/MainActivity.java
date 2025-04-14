@@ -18,10 +18,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cst338hw4_gymlog.ViewHolders.GymLogAdapter;
+import com.example.cst338hw4_gymlog.ViewHolders.GymLogViewModel;
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.database.entities.User;
@@ -47,11 +49,15 @@ public class MainActivity extends AppCompatActivity {
     private GymLogRepository repository;
     private User user;
 
+    private GymLogViewModel gymLogViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        gymLogViewModel = new ViewModelProvider(this).get(GymLogViewModel.class);
 
         RecyclerView recyclerView = binding.logDisplayRecyclerView;
         final GymLogAdapter adapter = new GymLogAdapter(new GymLogAdapter.GymLogDiff());
@@ -60,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         repository = GymLogRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
+
+        gymLogViewModel.getAllLogsByID(loggedInUserID).observe(this, gymLogs -> {
+            adapter.submitList(gymLogs);
+        });
 
         if(loggedInUserID == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
