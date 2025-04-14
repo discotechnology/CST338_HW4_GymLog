@@ -10,6 +10,7 @@ import com.example.cst338hw4_gymlog.MainActivity;
 import com.example.cst338hw4_gymlog.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -83,19 +84,8 @@ public class GymLogRepository {
         return userDAO.getUserByID(userID);
     }
 
-    public ArrayList<GymLog> getAllLogsByUserID(int loggedInUserID) {
-        Future<ArrayList<GymLog>> future = GymLogDatabase.databaseWriteExecutor.submit(new Callable<ArrayList<GymLog>>() {
-            @Override
-            public ArrayList<GymLog> call() throws Exception {
-                return (ArrayList<GymLog>) gymLogDAO.getRecordsByUserID(loggedInUserID);
-            }
-        });
-        try {
-            return future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-            Log.i(MainActivity.TAG, "Problem retrieving GymLogs from repository.");
-        }
-        return null;
+    public LiveData<List<GymLog>> getAllLogsByUserID(int loggedInUserID) {
+        return gymLogDAO.getRecordsByUserID(loggedInUserID);
     }
+
 }

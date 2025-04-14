@@ -1,5 +1,6 @@
 package com.example.cst338hw4_gymlog.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -18,5 +19,5 @@ public interface GymLogDAO {
     List<GymLog> getAllRecords();
 
     @Query("select * from " + GymLogDatabase.gymLogTable + " where userID == :loggedInUserID order by date desc")
-    List<GymLog> getRecordsByUserID(int loggedInUserID);
+    LiveData<List<GymLog>> getRecordsByUserID(int loggedInUserID);
 }
