@@ -26,7 +26,7 @@ public class GymLogAdapter extends ListAdapter<GymLog, GymLogViewHolder> {
         holder.bind(current.toString());
     }
 
-    static class GymLogDiff extends DiffUtil.ItemCallback<GymLog> {
+    public static class GymLogDiff extends DiffUtil.ItemCallback<GymLog> {
         @Override
         public boolean areItemsTheSame(@NonNull GymLog oldItem, @NonNull GymLog newItem) {
             return oldItem == newItem;

@@ -18,7 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cst338hw4_gymlog.ViewHolders.GymLogAdapter;
 import com.example.cst338hw4_gymlog.database.GymLogRepository;
 import com.example.cst338hw4_gymlog.database.entities.GymLog;
 import com.example.cst338hw4_gymlog.database.entities.User;
@@ -50,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        RecyclerView recyclerView = binding.logDisplayRecyclerView;
+        final GymLogAdapter adapter = new GymLogAdapter(new GymLogAdapter.GymLogDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         repository = GymLogRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
@@ -58,18 +66,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
-
-        binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
-
-        updateDisplay();
-
         binding.logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInformationFromDisplay();
                 insertGymlogRecord();
-                updateDisplay();
             }
         });
     }
@@ -130,18 +131,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {
             Log.d(TAG, "Error reading value from Weight");
         }
-    }
-
-    private void updateDisplay() {
-        ArrayList<GymLog> allLogs = repository.getAllLogsByUserID(loggedInUserID);
-        if(allLogs.isEmpty()) {
-            binding.logDisplayTextView.setText(R.string.nothing_to_show_time_to_hit_the_gym);
-        }
-        StringBuilder sb = new StringBuilder();
-        for(GymLog log : allLogs) {
-            sb.append(log.toString());
-        }
-        binding.logDisplayTextView.setText(sb.toString());
     }
 
     private void loginUser(Bundle savedInstanceState) {
